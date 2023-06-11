@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import landingpage from "./images/landing-page.jpg";
 import NoAuth from "../../components/NoAuth";
 import useSignUp from "./hooks/useSignUp";
@@ -80,6 +82,7 @@ function SignUp() {
                 >
                   {signup.loading ? "Loading..." : "Submit"}
                 </Button>
+                <ToastContainer autoClose={3000} />
                 <p>
                   Already have an account?{" "}
                   <Link to="/login">Sign In Here </Link>
