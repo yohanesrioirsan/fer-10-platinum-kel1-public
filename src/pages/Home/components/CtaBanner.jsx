@@ -3,7 +3,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Col, Container, Row } from "react-bootstrap";
-import { RentButton } from "./RentButton";
+import RentButton  from "./RentButton";
 import SearchForm from "../../../components/SearchForm";
 
 function CtaBanner(props) {
