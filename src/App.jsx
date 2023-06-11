@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Result from "./pages/Result";
 import Detail from "./pages/Detail";
+import SignUp from "./pages/SignUp";
 
 function App() {
   const router = createBrowserRouter([
@@ -22,6 +23,10 @@ function App() {
     {
       path: "/detail/",
       element: <Detail />,
+    },
+    {
+      path: "/signup",
+      element: <SignUp />,
     },
   ]);
   return <RouterProvider router={router} />;
