@@ -114,3 +114,8 @@ p {
 #footer a:hover {
   color: #0d28a6;
 }
+
+li {
+  font-weight: 500;
+  opacity: 70%;
+}
