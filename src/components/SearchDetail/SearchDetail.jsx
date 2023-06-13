@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
 function SearchDetail() {
   const location = useLocation();
@@ -95,11 +95,41 @@ function SearchDetail() {
                       {carData.category}
                     </Card.Text>
                     <Card.Text>
+                      <span>Tentukan lama sewa mobil. (Max 7 Hari.)</span>
+                    </Card.Text>
+
+                    {/* ADD DATE PICKER DISINI */}
+                    <div
+                      style={{
+                        width: "100%",
+                        height: "25px",
+                        border: "1px solid black",
+                        backgroundColor: "black",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      {}
+                    </div>
+
+                    {/* BATAS ADD PICKER  */}
+                    <Card.Text>
                       <Row>
-                        <Col>total</Col>
-                        <Col>{carData.price}</Col>
+                        <Col>Total</Col>
+                        <Col>Rp. {carData.price}</Col>
                       </Row>
                     </Card.Text>
+
+                    {/* ADD BUTTON DISINI */}
+
+                    <Button
+                      type="button"
+                      variant="success"
+                      style={{ width: "100%" }}
+                    >
+                      Lanjutkan Pembayaran
+                    </Button>
+
+                    {/* BATAS BUTTON */}
                   </Card.Body>
                 </Card>
               </div>
