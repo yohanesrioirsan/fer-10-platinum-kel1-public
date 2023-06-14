@@ -18,9 +18,15 @@ function SignUp() {
   };
   return (
     <NoAuth>
-      <div>
+      <div style={{ overflow: "hidden" }}>
         <Row>
-          <Col lg={6} sm={12} className="d-flex flex-column justify-content-center align-items-center" style={{ height: "100vh" }}>
+          <Col
+            xs={12}
+            md={12}
+            lg={6}
+            className="d-flex justify-content-center align-items-center"
+            style={{ height: "100vh" }}
+          >
             <div className="form-section">
               <div
                 className="brand"
@@ -68,38 +74,53 @@ function SignUp() {
                     })
                   }
                 />
-                <Button type="submit" variant="primary" className="mt-3 mb-3 d-block" style={{ width: "100%" }} disabled={signup.loading}>
+                <Button
+                  type="submit"
+                  variant="primary"
+                  className="mt-3 mb-3 d-block"
+                  style={{ width: "100%" }}
+                  disabled={signup.loading}
+                >
                   {signup.loading ? "Loading..." : "Submit"}
                 </Button>
                 <ToastContainer autoClose={3000} />
                 <p>
-                  Already have an account? <Link to="/SignIn">Sign In Here </Link>
+                  Already have an account?{" "}
+                  <Link to="/SignIn">Sign In Here </Link>
                 </p>
               </Form>
             </div>
           </Col>
-          <Col>
+          <Col xs={12} md={12} lg={6} className="d-none d-md-block">
             <div className="side-panel">
               <div
                 style={{
                   backgroundColor: "#0D28A6",
                   height: "100vh",
                   width: "100%",
-                  position: "relative",
                 }}
               >
                 <div
                   style={{
                     color: "#FFFFFF",
                     opacity: "75%",
-                    paddingLeft: "340px",
-                    paddingTop: "150px",
+                    marginBottom: "50px",
+                    paddingLeft: "150px",
+                    paddingTop: "100px",
                   }}
                   className="container"
                 >
                   <h1>Binar Car Rental</h1>
                 </div>
-                <img style={{ position: "absolute", bottom: "0", right: "0" }} src={landingpage} alt="landing-page" />
+                <img
+                  style={{
+                    marginLeft: "150px",
+                    bottom: "0",
+                    right: "0",
+                  }}
+                  src={landingpage}
+                  alt="landing-page"
+                />
               </div>
             </div>
           </Col>
