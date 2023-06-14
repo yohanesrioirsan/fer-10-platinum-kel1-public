@@ -21,7 +21,7 @@ function useSignUp() {
         credentials
       );
       dispatch(signupSuccess(response.data));
-      navigate("/signup");
+      navigate("/signin");
     } catch (error) {
       dispatch(signupFailure());
     }
