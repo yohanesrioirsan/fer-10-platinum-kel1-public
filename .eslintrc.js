@@ -12,5 +12,11 @@ module.exports = {
     "no-param-reassign": 0,
     "import/no-extraneous-dependencies": 0,
     "react/prop-types": 0,
+    "react/function-component-definition": 0,
+    "arrow-body-style": 0,
+    "no-shadow": 0,
+    "prefer-template": 0,
+    "react/no-unescaped-entities": 0,
+    "no-console": 0,
   },
 };

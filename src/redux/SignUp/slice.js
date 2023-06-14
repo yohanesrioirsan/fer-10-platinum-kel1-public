@@ -34,7 +34,6 @@ const signupSlice = createSlice({
   },
 });
 
-export const { signupStart, signupSuccess, signupFailure } =
-  signupSlice.actions;
+export const { signupStart, signupSuccess, signupFailure } = signupSlice.actions;
 
 export default signupSlice.reducer;

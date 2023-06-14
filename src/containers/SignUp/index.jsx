@@ -20,12 +20,7 @@ function SignUp() {
     <NoAuth>
       <div>
         <Row>
-          <Col
-            lg={6}
-            sm={12}
-            className="d-flex flex-column justify-content-center align-items-center"
-            style={{ height: "100vh" }}
-          >
+          <Col lg={6} sm={12} className="d-flex flex-column justify-content-center align-items-center" style={{ height: "100vh" }}>
             <div className="form-section">
               <div
                 className="brand"
@@ -73,19 +68,12 @@ function SignUp() {
                     })
                   }
                 />
-                <Button
-                  type="submit"
-                  variant="primary"
-                  className="mt-3 mb-3 d-block"
-                  style={{ width: "100%" }}
-                  disabled={signup.loading}
-                >
+                <Button type="submit" variant="primary" className="mt-3 mb-3 d-block" style={{ width: "100%" }} disabled={signup.loading}>
                   {signup.loading ? "Loading..." : "Submit"}
                 </Button>
                 <ToastContainer autoClose={3000} />
                 <p>
-                  Already have an account?{" "}
-                  <Link to="/login">Sign In Here </Link>
+                  Already have an account? <Link to="/SignIn">Sign In Here </Link>
                 </p>
               </Form>
             </div>
@@ -111,11 +99,7 @@ function SignUp() {
                 >
                   <h1>Binar Car Rental</h1>
                 </div>
-                <img
-                  style={{ position: "absolute", bottom: "0", right: "0" }}
-                  src={landingpage}
-                  alt="landing-page"
-                />
+                <img style={{ position: "absolute", bottom: "0", right: "0" }} src={landingpage} alt="landing-page" />
               </div>
             </div>
           </Col>
