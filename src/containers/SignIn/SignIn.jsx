@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Container, Row, Col, Alert, Image, Navbar } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Container,
+  Row,
+  Col,
+  Alert,
+  Image,
+  Navbar,
+} from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { login } from "../../redux/SignIn/authSlice";
@@ -36,13 +45,16 @@ const SignIn = () => {
 
     try {
       // Kirim permintaan login ke API
-      const response = await fetch("https://bootcamp-rent-cars.herokuapp.com/admin/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        "https://bootcamp-rent-cars.herokuapp.com/admin/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       if (response.ok) {
         // Ambil token dari respons API
@@ -74,28 +86,56 @@ const SignIn = () => {
   return (
     <Container fluid>
       <Row className="h-100">
-        <Col xs={12} md={6} lg={6} className="bg-white d-flex align-items-center justify-content-center" style={{ height: "100vh" }}>
+        <Col
+          xs={12}
+          md={6}
+          lg={6}
+          className="bg-white d-flex align-items-center justify-content-center"
+          style={{ height: "100vh" }}
+        >
           <div>
             {error && <Alert variant="danger">{error}</Alert>}
             {loginSuccess && <Alert variant="success">Login berhasil</Alert>}
             <Navbar bg="light">
               <Navbar.Brand href="#home">
-                <Image src={process.env.PUBLIC_URL + "/logobcr.png"} className="d-inline-block align-top" alt="logo" />
+                <Image
+                  src={process.env.PUBLIC_URL + "/logobcr.png"}
+                  className="d-inline-block align-top"
+                  alt="logo"
+                />
               </Navbar.Brand>
             </Navbar>
             <h1 className="mt-4">Welcome Back!</h1>
             <Form onSubmit={handleSubmit}>
               <Form.Group controlId="email" className="mt-5">
                 <Form.Label>Email</Form.Label>
-                <Form.Control border="dark" type="email" value={email} onChange={handleEmailChange} required placeholder="Contoh: johndee@gmail.com" />
+                <Form.Control
+                  border="dark"
+                  type="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  required
+                  placeholder="Contoh: johndee@gmail.com"
+                />
               </Form.Group>
 
               <Form.Group controlId="password" className="mt-3">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" value={password} onChange={handlePasswordChange} required placeholder="6+ karakter" />
+                <Form.Control
+                  type="password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  required
+                  placeholder="6+ karakter"
+                />
               </Form.Group>
 
-              <Button variant="primary" type="submit" className="mt-4" style={{ backgroundColor: "#0D28A6", width: "100%" }}>
+              <Button
+                variant="primary"
+                type="submit"
+                className="mt-4"
+                style={{ backgroundColor: "#0D28A6", width: "100%" }}
+              >
                 Sign In
               </Button>
             </Form>
@@ -107,10 +147,34 @@ const SignIn = () => {
             </p>
           </div>
         </Col>
-        <Col xs={12} md={6} lg={6} className="d-none d-md-block" style={{ backgroundColor: "#0D28A6", height: "100vh" }}>
-          <div style={{ marginTop: "112px", marginLeft: "103px", color: "white" }}>
-            <h1 style={{ fontSize: "48px", fontWeight: 500, marginBottom: "49px" }}>Binar Car Rental</h1>
-            <Image src={process.env.PUBLIC_URL + "/landingpage.png"} style={{ marginTop: "49px", position: "relative", bottom: 0, right: 0 }} />
+        <Col
+          xs={12}
+          md={6}
+          lg={6}
+          className="d-none d-md-block"
+          style={{ backgroundColor: "#0D28A6", height: "100vh" }}
+        >
+          <div
+            style={{ marginTop: "112px", marginLeft: "103px", color: "white" }}
+          >
+            <h1
+              style={{
+                fontSize: "48px",
+                fontWeight: 500,
+                marginBottom: "49px",
+              }}
+            >
+              Binar Car Rental
+            </h1>
+            <Image
+              src={process.env.PUBLIC_URL + "/landingpage.png"}
+              style={{
+                marginTop: "49px",
+                position: "relative",
+                bottom: 0,
+                right: 0,
+              }}
+            />
           </div>
         </Col>
       </Row>
