@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function SearchDetail() {
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [carData, setCarData] = useState(null);
+
   const location = useLocation();
   const { car } = location.state;
-  const [carData, setCarData] = useState(null);
 
   const fetchCarData = async () => {
     try {
@@ -15,13 +19,33 @@ function SearchDetail() {
       );
       setCarData(response.data);
     } catch (error) {
-      <p>Error</p>;
+      <p>${error}</p>;
     }
   };
 
   useEffect(() => {
     fetchCarData();
   }, [car]);
+
+  const calculateTotalPrice = (startDate, endDate, pricePerDay) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const diffInDays = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+    const totalPrice = diffInDays * pricePerDay;
+    return totalPrice;
+  };
+
+  useEffect(() => {
+    if (dateRange[0] && dateRange[1]) {
+      const startDate = dateRange[0];
+      const endDate = dateRange[1];
+      const totalPrice = calculateTotalPrice(startDate, endDate, carData.price);
+      setCarData((prevCarData) => ({
+        ...prevCarData,
+        totalPrice,
+      }));
+    }
+  }, [dateRange, carData]);
 
   return (
     <div className="mb-5">
@@ -99,23 +123,25 @@ function SearchDetail() {
                     </Card.Text>
 
                     {/* ADD DATE PICKER DISINI */}
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "25px",
-                        border: "1px solid black",
-                        backgroundColor: "black",
-                        marginBottom: "20px",
-                      }}
-                    >
-                      {}
+                    <div className="mb-3">
+                      <DatePicker
+                        selectsRange
+                        startDate={dateRange[0]}
+                        endDate={dateRange[1]}
+                        onChange={(update) => {
+                          setDateRange(update);
+                        }}
+                        isClearable
+                        placeholderText="Pilih tanggal mulai dan akhir sewa"
+                        maxDate={new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)}
+                      />
                     </div>
 
                     {/* BATAS ADD PICKER  */}
                     <Card.Text>
                       <Row>
                         <Col>Total</Col>
-                        <Col>Rp. {carData.price}</Col>
+                        <Col>Rp. {carData.totalPrice}</Col>
                       </Row>
                     </Card.Text>
 

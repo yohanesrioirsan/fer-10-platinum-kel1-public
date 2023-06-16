@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.react-datepicker-wrapper,
+input[type="text"] {
+  content: "abcde";
+  border: 1px solid black;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.react-datepicker__input-container input::placeholder {
+  font-size: 12px;
+}
