@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import DatePicker from "react-datepicker";
+import ReactDatePicker from "react-datepicker";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 
+dayjs.extend(relativeTime);
+
 function SearchDetail() {
-  const [dateRange, setDateRange] = useState([null, null]);
   const [carData, setCarData] = useState(null);
 
   const location = useLocation();
@@ -26,6 +29,26 @@ function SearchDetail() {
   useEffect(() => {
     fetchCarData();
   }, [car]);
+
+  const [dateRange, setDateRange] = useState([null, null]);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post(
+        "https://bootcamp-rent-cars.herokuapp.com/customer/order",
+        {
+          start_rent_at: dateRange[0].toISOString().split("T")[0],
+          end_rent_at: dateRange[1].toISOString().split("T")[0],
+          car_id: car.id,
+        }
+      );
+      navigate(`/payment?orderId=${response.data.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const calculateTotalPrice = (startDate, endDate, pricePerDay) => {
     const start = new Date(startDate);
@@ -124,7 +147,8 @@ function SearchDetail() {
 
                     {/* ADD DATE PICKER DISINI */}
                     <div className="mb-3">
-                      <DatePicker
+                      <h5>Pilih Tanggal</h5>
+                      <ReactDatePicker
                         selectsRange
                         startDate={dateRange[0]}
                         endDate={dateRange[1]}
@@ -148,9 +172,10 @@ function SearchDetail() {
                     {/* ADD BUTTON DISINI */}
 
                     <Button
-                      type="button"
+                      type="submit"
                       variant="success"
                       style={{ width: "100%" }}
+                      onClick={handleSubmit}
                     >
                       Lanjutkan Pembayaran
                     </Button>
