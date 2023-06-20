@@ -10,7 +10,7 @@ import {
   Navbar,
 } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../redux/SignIn/authSlice";
 
 const SignIn = () => {
@@ -19,6 +19,7 @@ const SignIn = () => {
   const [error, setError] = useState(null); // Menyimpan pesan kesalahan
   const [loginSuccess, setLoginSuccess] = useState(false); // Menyimpan status login berhasil
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Mengatur overflow pada elemen body dan html menjadi hidden saat komponen ini dipasang
@@ -73,6 +74,7 @@ const SignIn = () => {
 
         // Set status login berhasil
         setLoginSuccess(true);
+        navigate("/");
       } else {
         throw new Error("Login failed");
       }
