@@ -18,7 +18,7 @@ function SearchDetail() {
   const fetchCarData = async () => {
     try {
       const response = await axios.get(
-        `https://bootcamp-rent-cars.herokuapp.com/customer/car/${car.id}`
+        `https://api-car-rental.binaracademy.org/customer/car/${car.id}`
       );
       setCarData(response.data);
     } catch (error) {
@@ -38,6 +38,12 @@ function SearchDetail() {
     try {
       const response = await axios.post(
         "https://bootcamp-rent-cars.herokuapp.com/customer/order",
+        {
+          headers: {
+            access_token:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN1c3RvbWVyQGJjci5pbyIsInJvbGUiOiJDdXN0b21lciIsImlhdCI6MTY4NzM0NzQ1NX0.Rf3l1y6vXFxlcyQ57ca-qt3nTtsqmDpELv18Vi2rhA4",
+          },
+        },
         {
           start_rent_at: dateRange[0].toISOString().split("T")[0],
           end_rent_at: dateRange[1].toISOString().split("T")[0],
@@ -147,7 +153,6 @@ function SearchDetail() {
 
                     {/* ADD DATE PICKER DISINI */}
                     <div className="mb-3">
-                      <h5>Pilih Tanggal</h5>
                       <ReactDatePicker
                         selectsRange
                         startDate={dateRange[0]}

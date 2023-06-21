@@ -24,7 +24,7 @@ function SearchResult({ name, status, category, minPrice, maxPrice }) {
 
   const fetchCarsData = async () => {
     const response = await axios.get(
-      "https://bootcamp-rent-cars.herokuapp.com/customer/v2/car",
+      "https://api-car-rental.binaracademy.org/customer/v2/car",
       {
         params: {
           name: searchParams.get("name"),
