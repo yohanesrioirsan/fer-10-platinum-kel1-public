@@ -6,6 +6,7 @@ import Result from "./pages/Result";
 import Detail from "./pages/Detail";
 import SignUp from "./pages/SignUp";
 import SignIn from "./containers/SignIn/SignIn";
+import PembayaranPilihMetode from "./pages/PembayaranPilihMetode";
 
 function App() {
   const router = createBrowserRouter([
@@ -32,6 +33,10 @@ function App() {
     {
       path: "/signin",
       element: <SignIn />,
+    },
+    {
+      path: "/pembayaranpilihmetode",
+      element: <PembayaranPilihMetode />,
     },
   ]);
   return <RouterProvider router={router} />;
