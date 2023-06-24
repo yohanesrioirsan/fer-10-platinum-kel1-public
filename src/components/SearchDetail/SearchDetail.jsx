@@ -174,7 +174,8 @@ function SearchDetail() {
                         }}
                         isClearable
                         placeholderText="Pilih tanggal mulai dan akhir sewa"
-                        maxDate={new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)}
+                        maxDate={new Date(Date.parse(dateRange[0]) + 7 * 24 * 60 * 60 * 1000)}
+                        minDate={new Date(Date.now())}
                       />
                     </div>
 
