@@ -53,9 +53,16 @@ function PilihMetode() {
           }}
         >
           <h4>Pilih Bank Transfer</h4>
-          <p style={{ fontWeight: 400 }}>Kamu bisa membayar dengan transfer melalui ATM, Internet Banking, atau Mobile Banking</p>
+          <p style={{ fontWeight: 400 }}>
+            Kamu bisa membayar dengan transfer melalui ATM, Internet Banking,
+            atau Mobile Banking
+          </p>
           <div>
-            <ul className="ms-3" ref={listRef} style={{ listStyleType: "none", padding: 0 }}>
+            <ul
+              className="ms-3"
+              ref={listRef}
+              style={{ listStyleType: "none", padding: 0 }}
+            >
               <li
                 className="mb-4"
                 onClick={() => handleBankSelection("BCA")}
@@ -178,26 +185,82 @@ function PilihMetode() {
             <div className="d-flex align-items-center justify-content-between ">
               <h5 style={{ marginRight: "10px" }}>Total</h5>
               <div style={{ display: "flex", alignItems: "center" }}>
-                <img src="/fi_chevron-up.png" alt="chevron-up" style={{ width: "20px", marginRight: "10rem", cursor: "pointer" }} onClick={handleChevronClick} />
+                <img
+                  src="/fi_chevron-up.png"
+                  alt="chevron-up"
+                  style={{
+                    width: "20px",
+                    marginRight: "10rem",
+                    cursor: "pointer",
+                  }}
+                  onClick={handleChevronClick}
+                />
                 <h5>Rp. 1.000.000</h5>
               </div>
             </div>
             {showPrices && (
-              <ul className="ps-2" style={{ fontFamily: "Arial", fontSize: "14px", fontWeight: 400, lineHeight: "20px" }}>
-                <li style={{ listStyleType: "none", fontWeight: "bold", color: "black" }}>Harga Sewa</li>
+              <ul
+                className="ps-2"
+                style={{
+                  fontFamily: "Arial",
+                  fontSize: "14px",
+                  fontWeight: 400,
+                  lineHeight: "20px",
+                }}
+              >
+                <li
+                  style={{
+                    listStyleType: "none",
+                    fontWeight: "bold",
+                    color: "black",
+                  }}
+                >
+                  Harga Sewa
+                </li>
                 <li className="ms-4">Sewa Mobil ....</li>
-                <li style={{ listStyleType: "none", fontWeight: "bold", color: "black" }}>Biaya Lainnya</li>
-                <li className="ms-4" style={{ display: "flex", justifyContent: "space-between" }}>
+                <li
+                  style={{
+                    listStyleType: "none",
+                    fontWeight: "bold",
+                    color: "black",
+                  }}
+                >
+                  Biaya Lainnya
+                </li>
+                <li
+                  className="ms-4"
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
                   Pajak <span style={{ color: "green" }}>(Termasuk)</span>
                 </li>
-                <li className="ms-4" style={{ display: "flex", justifyContent: "space-between" }}>
-                  Biaya Makan Sopir <span style={{ color: "green" }}>(Termasuk)</span>
+                <li
+                  className="ms-4"
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  Biaya Makan Sopir{" "}
+                  <span style={{ color: "green" }}>(Termasuk)</span>
                 </li>
 
-                <li style={{ listStyleType: "none", fontWeight: "bold", color: "black" }}>Belum Termasuk</li>
+                <li
+                  style={{
+                    listStyleType: "none",
+                    fontWeight: "bold",
+                    color: "black",
+                  }}
+                >
+                  Belum Termasuk
+                </li>
                 <li className="ms-4">Bensin</li>
                 <li className="ms-4">Tol dan Parkir</li>
-                <li style={{ listStyleType: "none", fontWeight: "bold", color: "black" }}>Akumulasi</li>
+                <li
+                  style={{
+                    listStyleType: "none",
+                    fontWeight: "bold",
+                    color: "black",
+                  }}
+                >
+                  Akumulasi
+                </li>
               </ul>
             )}
             <Button style={buttonStyle} disabled={!isBankSelected}>
