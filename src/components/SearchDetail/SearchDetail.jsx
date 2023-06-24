@@ -3,7 +3,7 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import ReactDatePicker from "react-datepicker";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -11,6 +11,7 @@ dayjs.extend(relativeTime);
 
 function SearchDetail() {
   const [carData, setCarData] = useState(null);
+  const [totalPriceValue, setTotalPriceValue] = useState(null)
 
   const location = useLocation();
   const { car } = location.state;
@@ -18,7 +19,7 @@ function SearchDetail() {
   const fetchCarData = async () => {
     try {
       const response = await axios.get(
-        `https://api-car-rental.binaracademy.org/customer/car/${car.id}`
+        `https://bootcamp-rent-cars.herokuapp.com/customer/car/${car.id}`
       );
       setCarData(response.data);
     } catch (error) {
@@ -32,28 +33,38 @@ function SearchDetail() {
 
   const [dateRange, setDateRange] = useState([null, null]);
 
-  const navigate = useNavigate();
+//   const navigate = useNavigate();
 
-  const handleSubmit = async () => {
-    try {
-      const response = await axios.post(
-        "https://bootcamp-rent-cars.herokuapp.com/customer/order",
-        {
-          headers: {
-            access_token:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN1c3RvbWVyQGJjci5pbyIsInJvbGUiOiJDdXN0b21lciIsImlhdCI6MTY4NzM0NzQ1NX0.Rf3l1y6vXFxlcyQ57ca-qt3nTtsqmDpELv18Vi2rhA4",
-          },
-        },
-        {
-          start_rent_at: dateRange[0].toISOString().split("T")[0],
-          end_rent_at: dateRange[1].toISOString().split("T")[0],
-          car_id: car.id,
-        }
-      );
-      navigate(`/payment?orderId=${response.data.id}`);
-    } catch (error) {
-      console.log(error);
+  const handleSubmit =  () => {
+    const rentalData = {
+        start_rent_at: dateRange[0].toISOString().split("T")[0],
+        end_rent_at: dateRange[1].toISOString().split("T")[0],
+        car_id: car.id,
+        totalPrice: totalPriceValue
     }
+    localStorage.setItem('rentalData', JSON.stringify(rentalData));
+
+    const rental = localStorage.getItem(`rentalData`)
+   console.log(rental)
+    // try {
+    //   const response = await axios.post(
+    //     "https://bootcamp-rent-cars.herokuapp.com/customer/order",
+    //     {
+    //       headers: {
+    //         access_token:
+    //           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN1c3RvbWVyQGJjci5pbyIsInJvbGUiOiJDdXN0b21lciIsImlhdCI6MTY4NzM0NzQ1NX0.Rf3l1y6vXFxlcyQ57ca-qt3nTtsqmDpELv18Vi2rhA4",
+    //       },
+    //     },
+    //     {
+    //       start_rent_at: dateRange[0].toISOString().split("T")[0],
+    //       end_rent_at: dateRange[1].toISOString().split("T")[0],
+    //       car_id: car.id,
+    //     }
+    //   );
+    //   navigate(`/payment?orderId=${response.data.id}`);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   const calculateTotalPrice = (startDate, endDate, pricePerDay) => {
@@ -61,6 +72,7 @@ function SearchDetail() {
     const end = new Date(endDate);
     const diffInDays = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
     const totalPrice = diffInDays * pricePerDay;
+    setTotalPriceValue(totalPrice)
     return totalPrice;
   };
 
