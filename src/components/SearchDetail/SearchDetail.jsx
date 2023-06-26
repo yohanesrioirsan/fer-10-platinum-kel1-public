@@ -1,16 +1,17 @@
+/* eslint-disable no-useless-concat */
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import ReactDatePicker from "react-datepicker";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 
 dayjs.extend(relativeTime);
 
 function SearchDetail() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [carData, setCarData] = useState(null);
   const [totalPriceValue, setTotalPriceValue] = useState(null);
 
@@ -20,7 +21,7 @@ function SearchDetail() {
   const fetchCarData = async () => {
     try {
       const response = await axios.get(
-        `https://bootcamp-rent-cars.herokuapp.com/customer/car/${car.id}`
+        `https://api-car-rental.binaracademy.org/customer/car/${car.id}`
       );
       setCarData(response.data);
     } catch (error) {
@@ -34,19 +35,31 @@ function SearchDetail() {
 
   const [dateRange, setDateRange] = useState([null, null]);
 
-  //   const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    console.log(totalPriceValue);
     const rentalData = {
       start_rent_at: dateRange[0].toISOString().split("T")[0],
       end_rent_at: dateRange[1].toISOString().split("T")[0],
       car_id: car.id,
-      total_price: totalPriceValue,
     };
-    localStorage.setItem("rentalData", JSON.stringify(rentalData));
-    const rental = localStorage.getItem(`rentalData`);
-    console.log(rental);
-    navigate(`/pembayaranpilihmetode?orderId=${car.id}`);
+    const config = {
+      headers: {
+        access_token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN1c3RvbWVyQGJjci5pbyIsInJvbGUiOiJDdXN0b21lciIsImlhdCI6MTY4Nzc4ODMxN30.zNiV5MlEIzYe-gA1PWP2rENdPlyiee5FgbtNE33IQas`,
+      },
+    };
+    console.log(config);
+    try {
+      const response = await axios.post(
+        "https://api-car-rental.binaracademy.org/customer/order",
+        rentalData,
+        config
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const calculateTotalPrice = (startDate, endDate, pricePerDay) => {

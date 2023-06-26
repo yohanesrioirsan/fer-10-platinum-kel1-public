@@ -17,7 +17,7 @@ function useSignUp() {
     try {
       dispatch(signupStart());
       const response = await axios.post(
-        "https://bootcamp-rent-cars.herokuapp.com/customer/auth/register",
+        "https://api-car-rental.binaracademy.org/customer/auth/register",
         credentials
       );
       dispatch(signupSuccess(response.data));

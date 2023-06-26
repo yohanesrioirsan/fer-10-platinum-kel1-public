@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { useState, useEffect } from "react";
 import {
   Form,
@@ -10,6 +11,7 @@ import {
   Navbar,
 } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../redux/SignIn/authSlice";
 
@@ -46,38 +48,34 @@ const SignIn = () => {
 
     try {
       // Kirim permintaan login ke API
-      const response = await fetch(
-        "https://bootcamp-rent-cars.herokuapp.com/admin/auth/login",
+      const response = await axios.post(
+        "https://api-car-rental.binaracademy.org/customer/auth/login",
         {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
+          email,
+          password,
         }
       );
 
-      if (response.ok) {
-        // Ambil token dari respons API
-        const { token } = await response.json();
+      console.log(response.data);
 
-        // Simpan token ke local storage
-        localStorage.setItem("token", token);
+      // Ambil token dari respons API
+      const dataLogin = response.data;
+      console.log(dataLogin);
 
-        // Dispatch aksi login dengan token
-        dispatch(login(token));
+      // Simpan token ke local storage
+      localStorage.setItem("token", dataLogin.access_token);
 
-        // Reset form dan error
-        setEmail("");
-        setPassword("");
-        setError(null);
+      // Dispatch aksi login dengan token
+      dispatch(login(dataLogin.access_token));
 
-        // Set status login berhasil
-        setLoginSuccess(true);
-        navigate("/");
-      } else {
-        throw new Error("Login failed");
-      }
+      // Reset form dan error
+      setEmail("");
+      setPassword("");
+      setError(null);
+
+      // Set status login berhasil
+      setLoginSuccess(true);
+      navigate("/");
     } catch (error) {
       // Tangani kesalahan login
       setError("Login failed, please try again.");
