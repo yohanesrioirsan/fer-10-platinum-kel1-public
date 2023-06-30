@@ -10,7 +10,7 @@ function SearchResult({ name, status, category, minPrice, maxPrice }) {
   const navigate = useNavigate();
 
   const selectCar = (car) => {
-    navigate(`/detail?id=2514`, {
+    navigate(`/detail?id=${car.id}`, {
       state: {
         name,
         status,

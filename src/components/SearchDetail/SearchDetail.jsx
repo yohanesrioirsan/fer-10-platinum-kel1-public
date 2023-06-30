@@ -4,16 +4,15 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import ReactDatePicker from "react-datepicker";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 
 dayjs.extend(relativeTime);
 
 function SearchDetail() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [carData, setCarData] = useState(null);
-  const [totalPriceValue, setTotalPriceValue] = useState(null);
 
   const location = useLocation();
   const { car } = location.state;
@@ -29,24 +28,18 @@ function SearchDetail() {
     }
   };
 
-  useEffect(() => {
-    fetchCarData();
-  }, [car]);
-
   const [dateRange, setDateRange] = useState([null, null]);
 
-  // const navigate = useNavigate();
-
   const handleSubmit = async () => {
-    console.log(totalPriceValue);
+    // console.log(totalPriceValue);
     const rentalData = {
       start_rent_at: dateRange[0].toISOString().split("T")[0],
-      end_rent_at: dateRange[1].toISOString().split("T")[0],
+      finish_rent_at: dateRange[1].toISOString().split("T")[0],
       car_id: car.id,
     };
     const config = {
       headers: {
-        access_token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN1c3RvbWVyQGJjci5pbyIsInJvbGUiOiJDdXN0b21lciIsImlhdCI6MTY4Nzc4ODMxN30.zNiV5MlEIzYe-gA1PWP2rENdPlyiee5FgbtNE33IQas`,
+        access_token: localStorage.getItem("token"),
       },
     };
     console.log(config);
@@ -56,32 +49,17 @@ function SearchDetail() {
         rentalData,
         config
       );
+      // setOrder(response.data);
       console.log(response.data);
+      navigate(`/selectmethod?id=${response.data.id}`);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const calculateTotalPrice = (startDate, endDate, pricePerDay) => {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    const diffInDays = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
-    const totalPrice = diffInDays * pricePerDay;
-    setTotalPriceValue(totalPrice);
-    return totalPrice;
-  };
-
   useEffect(() => {
-    if (dateRange[0] && dateRange[1]) {
-      const startDate = dateRange[0];
-      const endDate = dateRange[1];
-      const totalPrice = calculateTotalPrice(startDate, endDate, carData.price);
-      setCarData((prevCarData) => ({
-        ...prevCarData,
-        totalPrice,
-      }));
-    }
-  }, [dateRange, carData]);
+    fetchCarData();
+  }, [car]);
 
   return (
     <div className="mb-5">
@@ -182,7 +160,7 @@ function SearchDetail() {
                     <Card.Text>
                       <Row>
                         <Col>Total</Col>
-                        <Col>Rp. {carData.totalPrice}</Col>
+                        <Col>Rp. {carData.price}</Col>
                       </Row>
                     </Card.Text>
 

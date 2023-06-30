@@ -36,7 +36,7 @@ function App() {
       element: <SignIn />,
     },
     {
-      path: "/pembayaranpilihmetode",
+      path: "/selectmethod",
       element: <PembayaranPilihMetode />,
     },
   ]);
