@@ -13,6 +13,7 @@ dayjs.extend(relativeTime);
 function SearchDetail() {
   const navigate = useNavigate();
   const [carData, setCarData] = useState(null);
+  const [order, setOrder] = useState();
 
   const location = useLocation();
   const { car } = location.state;
@@ -49,9 +50,9 @@ function SearchDetail() {
         rentalData,
         config
       );
-      // setOrder(response.data);
+      setOrder(response.data);
       console.log(response.data);
-      navigate(`/selectmethod?id=${response.data.id}`);
+      navigate(`/selectmethod?id=${order.id}`);
     } catch (error) {
       console.log(error);
     }
