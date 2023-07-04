@@ -8,6 +8,7 @@ import Detail from "./pages/Detail";
 import SignUp from "./pages/SignUp";
 import SignIn from "./containers/SignIn/SignIn";
 import PembayaranPilihMetode from "./pages/PembayaranPilihMetode";
+import Confirmpayment from "./pages/ConfirmPayment/ConfirmPayment";
 
 function App() {
   const router = createBrowserRouter([
@@ -39,6 +40,11 @@ function App() {
       path: "/selectmethod",
       element: <PembayaranPilihMetode />,
     },
+    {
+        
+      path: "/ConfirmPayment",
+      element: <Confirmpayment />,
+    }
   ]);
   return <RouterProvider router={router} />;
 }
