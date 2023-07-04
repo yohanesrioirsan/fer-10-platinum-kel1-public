@@ -52,7 +52,7 @@ function SearchDetail() {
       );
       setOrder(response.data);
       console.log(response.data);
-      navigate(`/selectmethod?id=${order.id}`);
+      navigate(`/selectmethod/${order.id}`);
     } catch (error) {
       console.log(error);
     }
