@@ -5,6 +5,7 @@ import Search from "./pages/Search";
 import Result from "./pages/Result";
 import Detail from "./pages/Detail";
 import SignUp from "./pages/SignUp";
+import Confirmpayment from "./pages/ConfirmPayment/ConfirmPayment";
 
 function App() {
   const router = createBrowserRouter([
@@ -27,6 +28,10 @@ function App() {
     {
       path: "/signup",
       element: <SignUp />,
+    },
+    {
+      path: "/ConfirmPayment",
+      element: <Confirmpayment />,
     },
   ]);
   return <RouterProvider router={router} />;

@@ -1,0 +1,32 @@
+.cardConfirmPayment {
+  margin-bottom: 70px;
+}
+
+.labelSize {
+  font-size: 14px;
+}
+
+.formCustomBackground {
+  background: red;
+}
+
+.btnBayar {
+  height: 37px;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  padding: 8px 15px;
+  border-radius: 2px;
+  border: hidden;
+  display: unset;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  background: #5cb85f;
+  color: #fff;
+}
+
+.btnBayar:hover {
+  background: #409b43;
+  color: #ffffff;
+}
