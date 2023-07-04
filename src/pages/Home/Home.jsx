@@ -1,4 +1,5 @@
-import React from "react";
+import React , { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Hero from "../../components/Hero/Hero";
 import OurService from "./components/OurService";
 import WhyUs from "./components/WhyUs";
@@ -8,6 +9,14 @@ import Footer from "../../components/Footer";
 import FreqAsk from "./components/FreqAsk";
 
 function Home() {
+    const navigate = useNavigate()
+    const token = localStorage.getItem("token")
+    useEffect(() => {
+      if(token === "" || token === null ||token === undefined) {
+        navigate("/signin")
+      }
+    }, [])
+    
   return (
     <div>
       <Hero />
