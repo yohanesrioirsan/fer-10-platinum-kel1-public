@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { useNavigate } from "react-router-dom";
 import RentButton  from "../../pages/Home/components/RentButton";
 import SearchForm  from "../SearchForm";
 
@@ -14,6 +15,11 @@ function Hero(props) {
     withSearchForm = false,
     withHeroContent = true,
   } = props;
+  const navigate = useNavigate()
+  const onClickLogout = () => {
+    localStorage.setItem("token" , "")
+    navigate("/signin")
+  }
 
   return (
     <div>
@@ -47,6 +53,7 @@ function Hero(props) {
                         <Nav.Link href="#why-us">Why Us</Nav.Link>
                         <Nav.Link href="#testimonial">Testimonial</Nav.Link>
                         <Nav.Link href="#faq">FAQ</Nav.Link>
+                        <Nav.Link onClick={onClickLogout}>Logout</Nav.Link>
                       </Nav>
                     </Offcanvas.Body>
                   </Navbar.Offcanvas>
