@@ -1,11 +1,11 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Form, FormGroup, FormLabel, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
 
 function SearchFormDisable() {
     const [loading, setLoading] = useState(false);
-
+    const router = useRouter();
     const handleSubmit = (evt) => {
         evt.preventDefault();
         // console.log("result submit");
@@ -23,17 +23,15 @@ function SearchFormDisable() {
         finish_rent_at: "",
     });
 
-    const params = useParams();
-    const config = {
-        headers: {
-            access_token: localStorage.getItem("token"),
-        },
-    };
-
     const fetchAPIGetCarById = async () => {
         setLoading(true);
+        const config = {
+            headers: {
+                access_token: localStorage.getItem("token"),
+            },
+        };
         try {
-            const response = await axios.get(`https://api-car-rental.binaracademy.org/customer/order/${params.id}`, config);
+            const response = await axios.get(`https://api-car-rental.binaracademy.org/customer/order/${router.query.carId}`, config);
             if (response.status === 200) {
                 console.log(response.data);
                 setCarOrderDetail({
@@ -50,7 +48,6 @@ function SearchFormDisable() {
     };
 
     useEffect(() => {
-        console.log(params);
         fetchAPIGetCarById();
     }, []);
 

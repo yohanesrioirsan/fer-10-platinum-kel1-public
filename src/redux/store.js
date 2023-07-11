@@ -1,10 +1,10 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import carSlice from "./Car/carSlice";
 import signupReducer from "./SignUp/slice";
-import authReducer from "./SignIn/authSlice";
 
 const rootReducer = combineReducers({
   signup: signupReducer,
-  signin: authReducer,
+  car: carSlice
 });
 
 export default configureStore({
