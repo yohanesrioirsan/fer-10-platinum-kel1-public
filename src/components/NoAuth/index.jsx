@@ -4,17 +4,17 @@ import { useSelector } from "react-redux";
 
 function NoAuth(props) {
   const { children } = props;
-  const user = useSelector((state) => state.login);
+  const token = useSelector((state) => state.signin);
   const [mounted, setMounted] = useState();
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
-    if (user) {
+    if (token) {
       router.push("/");
     }
 
     setMounted(true);
-  }, [user]);
+  }, [token]);
 
   return mounted ? children : <span />;
 }

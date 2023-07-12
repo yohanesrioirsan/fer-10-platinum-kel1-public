@@ -4,17 +4,17 @@ import { useSelector } from "react-redux";
 
 function Auth(props) {
   const { children } = props;
-  const { user } = useSelector((state) => state.login);
+  const { token } = useSelector((state) => state.signin);
   const [mounted, setMounted] = useState();
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
-    if (!user) {
-      router.push("/signup");
+    if (!token) {
+      router.push("/signin");
     }
 
     setMounted(true);
-  }, [user]);
+  }, [token]);
 
   return mounted ? children : <span />;
 }
