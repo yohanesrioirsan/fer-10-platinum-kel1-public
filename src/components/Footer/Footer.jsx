@@ -1,5 +1,11 @@
 import React from "react";
-import { Col, Container, Image, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
+import Image from "next/image";
+import fbIcon from "@/assets/images/icon_facebook.png";
+import igIcon from "@/assets/images/icon_instagram.png";
+import twitterIcon from "@/assets/images/icon_twitter.png";
+import mailIcon from "@/assets/images/icon_mail.png";
+import twitchIcon from "@/assets/images/icon_twitch.png";
 
 function Footer() {
   return (
@@ -28,11 +34,41 @@ function Footer() {
           <Col>
             <p>Connect with us</p>
             <div className="d-flex">
-              <Image src="images/icon_facebook.png" className="p-2" />
-              <Image src="images/icon_instagram.png" className="p-2" />
-              <Image src="images/icon_twitter.png" className="p-2" />
-              <Image src="images/icon_mail.png" className="p-2" />
-              <Image src="images/icon_twitch.png" className="p-2" />
+              <Image
+                src={fbIcon}
+                className="p-2"
+                width={42}
+                height={42}
+                alt="icon"
+              />
+              <Image
+                src={igIcon}
+                className="p-2"
+                width={42}
+                height={42}
+                alt="icon"
+              />
+              <Image
+                src={twitchIcon}
+                className="p-2"
+                width={42}
+                height={42}
+                alt="icon"
+              />
+              <Image
+                src={mailIcon}
+                className="p-2"
+                width={42}
+                height={42}
+                alt="icon"
+              />
+              <Image
+                src={twitchIcon}
+                className="p-2"
+                width={42}
+                height={42}
+                alt="icon"
+              />
             </div>
           </Col>
           <Col>

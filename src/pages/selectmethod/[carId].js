@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import PilihMetode from "@/containers/SelectMethod/PilihMetode";
 import CardConfirmPayment from "@/containers/SelectMethod/CardConfirmPayment";
 import Auth from "@/components/Auth";
+import PaymentSuccess from "@/containers/PaymentSuccess/PaymentSuccess";
 
 function PembayaranPilihMetode() {
   const [progress, setProgress] = useState(0);
@@ -26,7 +27,9 @@ function PembayaranPilihMetode() {
         {progress === 1 ? (
           <PilihMetode setProgress={setProgress} />
         ) : progress === 2 ? (
-          <CardConfirmPayment />
+          <CardConfirmPayment setProgress={setProgress} />
+        ) : progress === 3 ? (
+          <PaymentSuccess />
         ) : null}
         <Footer />
       </>

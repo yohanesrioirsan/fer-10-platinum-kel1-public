@@ -1,0 +1,25 @@
+.card_car-description {
+  min-height: 30rem;
+}
+
+.wrapper_file-uploader {
+  border: 1px solid white;
+  background-color: rgba(238, 238, 238, 1);
+  border-radius: 0.3rem;
+  min-height: 15rem;
+}
+
+.label_file-uploader {
+  width: 100%;
+  min-height: 15rem;
+  cursor: pointer;
+}
+
+.wrapper_file-uploader:hover {
+  outline: auto;
+  outline-style: dashed;
+}
+
+.label_file-uploader input[type="file"] {
+  display: none;
+}
