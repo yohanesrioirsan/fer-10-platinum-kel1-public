@@ -49,7 +49,7 @@ function Footer() {
                 alt="icon"
               />
               <Image
-                src={twitchIcon}
+                src={twitterIcon}
                 className="p-2"
                 width={42}
                 height={42}
@@ -73,9 +73,13 @@ function Footer() {
           </Col>
           <Col>
             <p>Copyright Binar 2022</p>
-            <a href="#home">
-              <img src="images/logo.png" alt="" />
-            </a>
+            <div
+              style={{
+                width: "100px",
+                height: "34px",
+                backgroundColor: "#0D28A6",
+              }}
+            ></div>
           </Col>
         </Row>
       </Container>
