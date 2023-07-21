@@ -10,14 +10,18 @@ import { useRouter } from "next/router";
 function useSignUp() {
   const signup = useSelector((state) => state.signup);
   const dispatch = useDispatch();
-  const router = useRouter()
+  const router = useRouter();
 
   const doSignUp = async (credentials) => {
     try {
       dispatch(signupStart());
       const response = await axios.post(
-        "https://bootcamp-rent-cars.herokuapp.com/customer/auth/register",
-        credentials
+        "https://api-car-rental.binaracademy.org/customer/auth/register",
+        {
+          email: credentials.email,
+          password: credentials.password,
+          role: "Customer",
+        }
       );
       dispatch(signupSuccess(response.data));
       router.push("/signin");
